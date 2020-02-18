@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import Person from "./Person";
+import { addIndividualFine } from "../Redux/Actions";
+import { subIndividualFine } from "../Redux/Actions";
 // import state from "../Redux/Reducers/AddPerson";
 
 export class PersonList extends Component {
@@ -10,19 +12,21 @@ export class PersonList extends Component {
   }
 
   render() {
-    console.log("props person",this.props.fake);
     return (
       <div>
-      <h4>Hi Nikki</h4>
         {
-
-        //   this.props.persons.map((user) => (
-        //     <Person
-        //       name={user.name}
-        //       individualFine={user.individualFine}
-        //       />
-        //   )
-        // )
+          this.props.persons.map((user) =>
+            <Person
+              name={user.name}
+              individualFine={user.individualFine}
+              addIndividualFine={() => {
+                this.props.addIndividualFine(user.id)
+              }}
+              subIndividualFine={() => {
+                this.props.subIndividualFine(user.id)
+              }}
+              />
+        )
       }
       </div>
     )
@@ -43,9 +47,15 @@ export class PersonList extends Component {
 
 function mapStateToProps(state) {
   return {
-    fake: state.persons
+    persons: state.AddPerson.persons
   }
 }
 
+function mapDispatchToProps(dispatch) {
+  return {
+    addIndividualFine: (id) => dispatch(addIndividualFine(id)),
+    subIndividualFine: (id) => dispatch(subIndividualFine(id))
+  }
+}
 
-export default connect(mapStateToProps)(PersonList);
+export default connect(mapStateToProps, mapDispatchToProps)(PersonList);

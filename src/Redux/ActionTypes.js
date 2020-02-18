@@ -1,3 +1,3 @@
-export const ADD_PERSON = "ADD_TODO";
-export const ADD_FINE = "ADD_FINE";
-export const SUB_FINE = "SUB_FINE";
+export const ADD_PERSON = "ADD_PERSON";
+export const ADD_INDIVIDUAL_FINE = "ADD_INDIVIDUAL_FINE";
+export const SUB_INDIVIDUAL_FINE = "SUB_INDIVIDUAL_FINE";

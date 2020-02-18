@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { addPerson } from "../Redux/Actions.js"
+import { addPerson } from "../Redux/Actions"
 
 class AddPerson extends Component {
   constructor(props) {
