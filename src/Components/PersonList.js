@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import Person from "./Person";
 import { addIndividualFine } from "../Redux/Actions";
 import { subIndividualFine } from "../Redux/Actions";
+import { calculateTotalFine } from "../Redux/Actions"
 // import state from "../Redux/Reducers/AddPerson";
 
 export class PersonList extends Component {
@@ -14,6 +15,7 @@ export class PersonList extends Component {
   render() {
     return (
       <div>
+        <h3>Total :  {this.props.totalFine}</h3>
         {
           this.props.persons.map((user) =>
             <Person
@@ -21,9 +23,11 @@ export class PersonList extends Component {
               individualFine={user.individualFine}
               addIndividualFine={() => {
                 this.props.addIndividualFine(user.id)
+                this.props.calculateTotalFine()
               }}
               subIndividualFine={() => {
                 this.props.subIndividualFine(user.id)
+                this.props.calculateTotalFine()
               }}
               />
         )
@@ -47,14 +51,16 @@ export class PersonList extends Component {
 
 function mapStateToProps(state) {
   return {
-    persons: state.AddPerson.persons
+    persons: state.AddPerson.persons,
+    totalFine: state.AddPerson.totalFine
   }
 }
 
 function mapDispatchToProps(dispatch) {
   return {
     addIndividualFine: (id) => dispatch(addIndividualFine(id)),
-    subIndividualFine: (id) => dispatch(subIndividualFine(id))
+    subIndividualFine: (id) => dispatch(subIndividualFine(id)),
+    calculateTotalFine: () => dispatch(calculateTotalFine())
   }
 }
 

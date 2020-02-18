@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { addPerson } from "../Redux/Actions"
+import { addPerson } from "../Redux/Actions";
 
 class AddPerson extends Component {
   constructor(props) {
@@ -28,13 +28,16 @@ class AddPerson extends Component {
 
   addPerson(e){
     this.props.addPerson(this.state.newPerson);
-    this.setState({persons: ""});
+    // this.setState({persons: ""});
   }
 
 
   render() {
+    let name = this.props.userName;
     return (
-      <div className="App"> <br/> <br/>
+      <div className="App">
+        <h2>Welcome {name}!</h2>
+        <br/>
         <label>Add Person</label><br />
         <input type="text"  onChange={this.addPersonHandler.bind(this)} />  <br />
         <button onClick={this.addPerson.bind(this)}>Add Person</button> <br /> <br />
@@ -43,4 +46,10 @@ class AddPerson extends Component {
   }
 }
 
-export default connect(null,{ addPerson })(AddPerson);
+function mapStateToProps(state) {
+  return {
+    userName: state.WelcomeUser.userName
+  }
+}
+
+export default connect(mapStateToProps,{ addPerson })(AddPerson);
